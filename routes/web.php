@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DatosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +11,14 @@ use App\Http\Controllers\DatosController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-
+*/
 
 Route::get('/', function () {
     return view('welcome');
-});*/
+});
 
-Route::get('/',HomeController::class);
-Route::get('datos',[DatosController::class,'index']);
-Route::get('datos/create',[DatosController::class,'create']);
-Route::get('datos/{dato}',[DatosController::class,'show']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
